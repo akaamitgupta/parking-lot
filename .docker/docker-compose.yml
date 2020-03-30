@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+    parking_lot_server:
+        container_name: parking_lot
+        build:
+            context: ../
+            dockerfile: .docker/Dockerfile
+        volumes:
+            - ../:/usr/src/app
+        stdin_open: true
+        tty: true
+        restart: always
