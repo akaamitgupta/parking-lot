@@ -21,6 +21,10 @@ class ParkingLot:
         """Get the total available slots."""
         return self._available_slots
 
+    def get_issued_tickets(self):
+        """Get all issued tickets."""
+        return self._issued_tickets.values()
+
     def park(self, vehicle):
         """Park the given vehicle."""
         if not self._available_slots:
@@ -37,7 +41,7 @@ class ParkingLot:
 
     def unpark(self, slot_number):
         """Unpark the vehicle on given slot number."""
-        ticket = self._issued_tickets.pop(int(slot_number), None)
+        ticket = self._issued_tickets.pop(slot_number, None)
 
         if not ticket:
             raise InvalidSlotNumber
