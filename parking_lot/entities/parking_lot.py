@@ -1,6 +1,7 @@
 from parking_lot.entities.slot import Slot
 from parking_lot.entities.ticket import Ticket
 from parking_lot.exceptions.no_available_slot import NoAvailableSlot
+from parking_lot.exceptions.duplicate_vehicle import DuplicateVehicle
 from parking_lot.exceptions.invalid_slot_number import InvalidSlotNumber
 
 
@@ -29,6 +30,9 @@ class ParkingLot:
         """Park the given vehicle."""
         if not self._available_slots:
             raise NoAvailableSlot
+
+        if self.find_ticket_by_registration_number(vehicle.get_registration_number()):
+            raise DuplicateVehicle
 
         slot = self._get_nearest_available_slot()
         slot.mark_unavailable()

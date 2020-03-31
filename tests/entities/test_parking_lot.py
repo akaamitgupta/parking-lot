@@ -4,6 +4,7 @@ from unittest import TestCase
 from parking_lot.entities.vehicle import Vehicle
 from parking_lot.entities.parking_lot import ParkingLot
 from parking_lot.exceptions.no_available_slot import NoAvailableSlot
+from parking_lot.exceptions.duplicate_vehicle import DuplicateVehicle
 from parking_lot.exceptions.invalid_slot_number import InvalidSlotNumber
 
 
@@ -100,3 +101,10 @@ class TestParkingLot(TestCase):
 
         self.assertEqual(ticket, None)
 
+    def test_duplicate_vehicle_parking(self):
+        vehicle = Vehicle('KA-01-HH-2701', 'Blue')
+
+        self.parking_lot.park(vehicle)
+
+        with pytest.raises(DuplicateVehicle):
+            self.parking_lot.park(vehicle)
