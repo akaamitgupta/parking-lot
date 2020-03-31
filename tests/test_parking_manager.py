@@ -1,6 +1,8 @@
+import pytest
 from unittest import TestCase
 
 from parking_lot.parking_manager import ParkingManager
+from parking_lot.exceptions.parking_lot_not_found import ParkingLotNotFound
 
 
 class TestParkingManager(TestCase):
@@ -125,3 +127,7 @@ class TestParkingManager(TestCase):
         output = self.manager.slot_number_for_registration_number('KA-01-HH-8989')
 
         self.assertEqual('Not found', output)
+
+    def test_no_parking_lot_found(self):
+        with pytest.raises(ParkingLotNotFound):
+            self.manager.park('KA-01-HH-1234', 'White')
