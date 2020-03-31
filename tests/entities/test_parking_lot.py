@@ -1,7 +1,9 @@
+import pytest
 from unittest import TestCase
 
 from parking_lot.entities.vehicle import Vehicle
 from parking_lot.entities.parking_lot import ParkingLot
+from parking_lot.exceptions.no_available_slot import NoAvailableSlot
 
 
 class TestParkingLot(TestCase):
@@ -31,3 +33,14 @@ class TestParkingLot(TestCase):
 
         self.assertEqual(self.parking_lot.get_available_slots(), self.total_slots)
         self.assertEqual(ticket.get_slot().get_number(), 1)
+
+    def test_park_vehicle_fail(self):
+        vehicle1 = Vehicle('KA-01-HH-2701', 'Blue')
+        vehicle2 = Vehicle('KA-01-HH-2702', 'Black')
+        vehicle3 = Vehicle('KA-01-HH-2703', 'Brown')
+
+        self.parking_lot.park(vehicle1)
+        self.parking_lot.park(vehicle2)
+
+        with pytest.raises(NoAvailableSlot):
+            self.parking_lot.park(vehicle3)

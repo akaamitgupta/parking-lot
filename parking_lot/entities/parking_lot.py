@@ -1,5 +1,6 @@
 from parking_lot.entities.slot import Slot
 from parking_lot.entities.ticket import Ticket
+from parking_lot.exceptions.no_available_slot import NoAvailableSlot
 
 
 class ParkingLot:
@@ -22,7 +23,7 @@ class ParkingLot:
     def park(self, vehicle):
         """Park the given vehicle."""
         if not self._available_slots:
-            return None
+            raise NoAvailableSlot
 
         slot = self._get_nearest_available_slot()
         slot.mark_unavailable()
