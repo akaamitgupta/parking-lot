@@ -50,10 +50,13 @@ class ParkingLot:
     def filter_tickets_by_colour(self, color):
         """Filter the tickets by given color."""
         return [ticket for ticket in self._issued_tickets.values()
-                if ticket.get_vehicle().get_color() == color]
+            if ticket.get_vehicle().get_color() == color]
+
+    def find_ticket_by_registration_number(self, registration_number):
+        """Find the ticket by given registration number."""
+        return next((ticket for ticket in self._issued_tickets.values()
+            if ticket.get_vehicle().get_registration_number() == registration_number), None)
 
     def _get_nearest_available_slot(self):
         """Get the nearest slot available."""
-        slot = next((slot for slot in self._slots if slot.is_available()), None)
-
-        return slot
+        return next((slot for slot in self._slots if slot.is_available()), None)

@@ -69,3 +69,34 @@ class TestParkingLot(TestCase):
         registration_numbers = [ticket.get_vehicle().get_registration_number() for ticket in filtered_tickets]
 
         self.assertEqual(registration_numbers, [vehicle[0]['registration_number']])
+
+    def test_find_ticket_by_registration_number(self):
+        vehicle = [
+            {'registration_number': 'KA-01-HH-2701', 'color': 'Blue' },
+            {'registration_number': 'KA-01-HH-2702', 'color': 'Black' },
+        ]
+        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['color'])
+        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['color'])
+
+        self.parking_lot.park(vehicle1)
+        self.parking_lot.park(vehicle2)
+
+        ticket = self.parking_lot.find_ticket_by_registration_number(vehicle[0]['registration_number'])
+
+        self.assertEqual(ticket.get_vehicle().get_registration_number(), vehicle[0]['registration_number'])
+
+    def test_find_ticket_by_registration_number_fail(self):
+        vehicle = [
+            {'registration_number': 'KA-01-HH-2701', 'color': 'Blue' },
+            {'registration_number': 'KA-01-HH-2702', 'color': 'Black' },
+        ]
+        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['color'])
+        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['color'])
+
+        self.parking_lot.park(vehicle1)
+        self.parking_lot.park(vehicle2)
+
+        ticket = self.parking_lot.find_ticket_by_registration_number('KA-01-HH-2703')
+
+        self.assertEqual(ticket, None)
+
