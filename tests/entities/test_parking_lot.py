@@ -53,3 +53,19 @@ class TestParkingLot(TestCase):
 
         with pytest.raises(InvalidSlotNumber):
             self.parking_lot.unpark(2)
+
+    def test_filter_tickets_by_colour(self):
+        vehicle = [
+            {'registration_number': 'KA-01-HH-2701', 'color': 'Blue' },
+            {'registration_number': 'KA-01-HH-2702', 'color': 'Black' },
+        ]
+        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['color'])
+        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['color'])
+
+        self.parking_lot.park(vehicle1)
+        self.parking_lot.park(vehicle2)
+
+        filtered_tickets = self.parking_lot.filter_tickets_by_colour(vehicle[0]['color'])
+        registration_numbers = [ticket.get_vehicle().get_registration_number() for ticket in filtered_tickets]
+
+        self.assertEqual(registration_numbers, [vehicle[0]['registration_number']])
