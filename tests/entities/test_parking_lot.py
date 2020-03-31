@@ -18,14 +18,16 @@ class TestParkingLot(TestCase):
     def test_park_vehicle(self):
         vehicle = Vehicle('KA-01-HH-2701', 'Blue')
 
-        self.parking_lot.park(vehicle)
+        ticket = self.parking_lot.park(vehicle)
 
-        self.assertEqual(parking_lot.get_available_slots(), self.total_slots - 1)
+        self.assertEqual(self.parking_lot.get_available_slots(), self.total_slots - 1)
+        self.assertEqual(ticket.get_slot().get_number(), 1)
 
     def test_unpark_vehicle(self):
         vehicle = Vehicle('KA-01-HH-2701', 'Blue')
 
         ticket = self.parking_lot.park(vehicle)
-        self.parking_lot.unpark(ticket.get_slot().get_number())
+        ticket = self.parking_lot.unpark(ticket.get_slot().get_number())
 
-        self.assertEqual(parking_lot.get_available_slots(), self.total_slots)
+        self.assertEqual(self.parking_lot.get_available_slots(), self.total_slots)
+        self.assertEqual(ticket.get_slot().get_number(), 1)
