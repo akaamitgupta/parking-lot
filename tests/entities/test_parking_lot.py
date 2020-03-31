@@ -56,27 +56,27 @@ class TestParkingLot(TestCase):
 
     def test_filter_tickets_by_colour(self):
         vehicle = [
-            {'registration_number': 'KA-01-HH-2701', 'color': 'Blue' },
-            {'registration_number': 'KA-01-HH-2702', 'color': 'Black' },
+            {'registration_number': 'KA-01-HH-2701', 'colour': 'Blue' },
+            {'registration_number': 'KA-01-HH-2702', 'colour': 'Black' },
         ]
-        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['color'])
-        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['color'])
+        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['colour'])
+        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['colour'])
 
         self.parking_lot.park(vehicle1)
         self.parking_lot.park(vehicle2)
 
-        filtered_tickets = self.parking_lot.filter_tickets_by_colour(vehicle[0]['color'])
+        filtered_tickets = self.parking_lot.filter_tickets_by_colour(vehicle[0]['colour'])
         registration_numbers = [ticket.get_vehicle().get_registration_number() for ticket in filtered_tickets]
 
         self.assertEqual(registration_numbers, [vehicle[0]['registration_number']])
 
     def test_find_ticket_by_registration_number(self):
         vehicle = [
-            {'registration_number': 'KA-01-HH-2701', 'color': 'Blue' },
-            {'registration_number': 'KA-01-HH-2702', 'color': 'Black' },
+            {'registration_number': 'KA-01-HH-2701', 'colour': 'Blue' },
+            {'registration_number': 'KA-01-HH-2702', 'colour': 'Black' },
         ]
-        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['color'])
-        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['color'])
+        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['colour'])
+        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['colour'])
 
         self.parking_lot.park(vehicle1)
         self.parking_lot.park(vehicle2)
@@ -87,11 +87,11 @@ class TestParkingLot(TestCase):
 
     def test_find_ticket_by_registration_number_fail(self):
         vehicle = [
-            {'registration_number': 'KA-01-HH-2701', 'color': 'Blue' },
-            {'registration_number': 'KA-01-HH-2702', 'color': 'Black' },
+            {'registration_number': 'KA-01-HH-2701', 'colour': 'Blue' },
+            {'registration_number': 'KA-01-HH-2702', 'colour': 'Black' },
         ]
-        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['color'])
-        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['color'])
+        vehicle1 = Vehicle(vehicle[0]['registration_number'], vehicle[0]['colour'])
+        vehicle2 = Vehicle(vehicle[1]['registration_number'], vehicle[1]['colour'])
 
         self.parking_lot.park(vehicle1)
         self.parking_lot.park(vehicle2)

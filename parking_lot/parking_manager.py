@@ -17,10 +17,10 @@ class ParkingManager:
 
         return f'Created a parking lot with {self._parking_lot.get_total_slots()} slots'
 
-    def park(self, registration_number, color):
+    def park(self, registration_number, colour):
         """Park the given vehicle in parking lot."""
         try:
-            vehicle = Vehicle(registration_number, color)
+            vehicle = Vehicle(registration_number, colour)
             ticket = self._parking_lot.park(vehicle)
 
             return f'Allocated slot number: {ticket.get_slot().get_number()}'
@@ -36,13 +36,13 @@ class ParkingManager:
     def status(self):
         """Get status of parking lot."""
         return [['Slot No.', 'Registration No', 'Colour']] + [
-            [str(ticket.get_slot().get_number()), ticket.get_vehicle().get_registration_number(), ticket.get_vehicle().get_color()]
+            [str(ticket.get_slot().get_number()), ticket.get_vehicle().get_registration_number(), ticket.get_vehicle().get_colour()]
             for ticket in self._parking_lot.get_issued_tickets()
         ]
 
-    def registration_numbers_for_cars_with_colour(self, color):
+    def registration_numbers_for_cars_with_colour(self, colour):
         """Get registration numbers of given colour of vehicle."""
-        tickets = self._parking_lot.filter_tickets_by_colour(color)
+        tickets = self._parking_lot.filter_tickets_by_colour(colour)
 
         if tickets:
             return ', '.join(
@@ -51,9 +51,9 @@ class ParkingManager:
 
         return 'Not found'
 
-    def slot_numbers_for_cars_with_colour(self, color):
+    def slot_numbers_for_cars_with_colour(self, colour):
         """Get slot numbers of given colour of vehicle."""
-        tickets = self._parking_lot.filter_tickets_by_colour(color)
+        tickets = self._parking_lot.filter_tickets_by_colour(colour)
 
         if tickets:
             return ', '.join([str(ticket.get_slot().get_number()) for ticket in tickets])

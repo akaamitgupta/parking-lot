@@ -51,10 +51,10 @@ class ParkingLot:
 
         return ticket
 
-    def filter_tickets_by_colour(self, color):
-        """Filter the tickets by given color."""
+    def filter_tickets_by_colour(self, colour):
+        """Filter the tickets by given colour."""
         return [ticket for ticket in self._issued_tickets.values()
-            if ticket.get_vehicle().get_color() == color]
+            if ticket.get_vehicle().get_colour() == colour]
 
     def find_ticket_by_registration_number(self, registration_number):
         """Find the ticket by given registration number."""

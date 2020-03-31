@@ -8,9 +8,9 @@ class TestVehicle(TestCase):
 
     def test_create_vehicle(self):
         registration_number = 'KA-01-HH-2701'
-        color = 'Blue'
+        colour = 'Blue'
 
-        vehicle = Vehicle(registration_number, color)
+        vehicle = Vehicle(registration_number, colour)
 
         self.assertEqual(vehicle.get_registration_number(), registration_number)
-        self.assertEqual(vehicle.get_color(), color)
+        self.assertEqual(vehicle.get_colour(), colour)
