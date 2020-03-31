@@ -33,3 +33,35 @@ class ParkingManager:
 
         return f'Slot number {ticket.get_slot().get_number()} is free'
 
+    def status(self):
+        """Get status of parking lot."""
+        return [['Slot No.', 'Registration No', 'Colour']] + [
+            [str(ticket.get_slot().get_number()), ticket.get_vehicle().get_registration_number(), ticket.get_vehicle().get_color()]
+            for ticket in self._parking_lot.get_issued_tickets()
+        ]
+
+    def registration_numbers_for_cars_with_colour(self, color):
+        """Get registration numbers of given colour of vehicle."""
+        tickets = self._parking_lot.filter_tickets_by_colour(color)
+
+        if tickets:
+            return ', '.join(
+                [ticket.get_vehicle().get_registration_number() for ticket in tickets]
+            )
+
+        return 'Not found'
+
+    def slot_numbers_for_cars_with_colour(self, color):
+        """Get slot numbers of given colour of vehicle."""
+        tickets = self._parking_lot.filter_tickets_by_colour(color)
+
+        if tickets:
+            return ', '.join([str(ticket.get_slot().get_number()) for ticket in tickets])
+
+        return 'Not found'
+
+    def slot_number_for_registration_number(self, registration_number):
+        """Get slot number of given registration number of vehicle."""
+        ticket = self._parking_lot.find_ticket_by_registration_number(registration_number)
+
+        return ticket.get_slot().get_number() if ticket else 'Not found'
