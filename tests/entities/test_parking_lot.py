@@ -4,6 +4,7 @@ from unittest import TestCase
 from parking_lot.entities.vehicle import Vehicle
 from parking_lot.entities.parking_lot import ParkingLot
 from parking_lot.exceptions.no_available_slot import NoAvailableSlot
+from parking_lot.exceptions.invalid_slot_number import InvalidSlotNumber
 
 
 class TestParkingLot(TestCase):
@@ -44,3 +45,11 @@ class TestParkingLot(TestCase):
 
         with pytest.raises(NoAvailableSlot):
             self.parking_lot.park(vehicle3)
+
+    def test_uppark_vehicle_fail(self):
+        vehicle = Vehicle('KA-01-HH-2701', 'Blue')
+
+        self.parking_lot.park(vehicle)
+
+        with pytest.raises(InvalidSlotNumber):
+            self.parking_lot.unpark(2)

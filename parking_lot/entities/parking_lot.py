@@ -1,6 +1,7 @@
 from parking_lot.entities.slot import Slot
 from parking_lot.entities.ticket import Ticket
 from parking_lot.exceptions.no_available_slot import NoAvailableSlot
+from parking_lot.exceptions.invalid_slot_number import InvalidSlotNumber
 
 
 class ParkingLot:
@@ -39,7 +40,7 @@ class ParkingLot:
         ticket = self._issued_tickets.pop(int(slot_number), None)
 
         if not ticket:
-            return None
+            raise InvalidSlotNumber
 
         ticket.get_slot().mark_available()
         self._available_slots += 1
